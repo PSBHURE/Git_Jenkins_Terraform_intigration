@@ -16,9 +16,9 @@ pipeline {
 		stage('Backend Creation') {
 			steps {
 				dir('bootstrap'){
-					sh 'terraform init'
-					sh 'terraform plan -out tfplan1'
-					sh 'terraform show -no-color tfplan > tfplan1.txt'
+					sh "terraform init"
+					sh "terraform plan -out tfplan1"
+					sh "terraform show -no-color tfplan1 > tfplan1.txt"
 				}
 			}		
 		}
@@ -29,13 +29,13 @@ pipeline {
         }
         stage('Terraform init') {
             steps {
-                sh 'terraform init'
+                sh "terraform init"
             }
         }
         stage('Plan') {
             steps {
-                sh 'terraform plan -out tfplan'
-                sh 'terraform show -no-color tfplan > tfplan.txt'
+                sh "terraform plan -out tfplan"
+                sh "terraform show -no-color tfplan > tfplan.txt"
             }
         }
         stage('Apply / Destroy') {
@@ -50,7 +50,7 @@ pipeline {
 
                         sh "terraform ${action} -input=false tfplan"
                     } else if (params.action == 'destroy') {
-                        sh 'terraform ${action} --auto-approve'
+                        sh "terraform ${action} --auto-approve"
                     } else {
                         error "Invalid action selected. Please choose either 'apply' or 'destroy'."
                     }
