@@ -10,16 +10,11 @@ pipeline {
 
    agent  any
     stages {
-        stage('checkout') {
+        stage('Checkout') {
             steps {
-                 script{
-                        dir("terraform")
-                        {
-                            git "https://github.com/PSBHURE/Git_Jenkins_Terraform_intigration.git"
-                        }
-                    }
-                }
+                git branch: 'main', url: 'https://github.com/PSBHURE/Git_Jenkins_Terraform_intigration.git'
             }
+        }
 
         stage('Plan') {
             steps {
