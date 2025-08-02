@@ -18,6 +18,12 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/PSBHURE/Git_Jenkins_Terraform_intigration.git'
             }
         }
+		stage('Debug') {
+			steps {
+				sh 'ls -la'
+				sh 'find .'
+			}		
+		}
         stage('Terraform init') {
             steps {
                 sh 'terraform init'
