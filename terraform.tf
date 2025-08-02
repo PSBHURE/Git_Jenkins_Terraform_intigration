@@ -6,6 +6,12 @@ terraform {
     version = "6.5.0"
     }
   }
+  backend "s3" {
+  bucket = "git-jenkins-terraform-intigration-state-bucket"
+  key = "terraform.tfstate"
+  region = "ap-south-1"
+  dynamodb_table = "git-jenkins-terraform-intigration-table"
+ }
 }
 
 provider "aws" {

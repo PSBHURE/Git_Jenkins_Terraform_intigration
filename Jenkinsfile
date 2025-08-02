@@ -18,10 +18,13 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/PSBHURE/Git_Jenkins_Terraform_intigration.git'
             }
         }
-		stage('Debug') {
+		stage('Backend Creation') {
 			steps {
-				sh 'ls -la'
-				sh 'find .'
+				dir('bootstrap'){
+					sh 'terraform init'
+					sh 'terraform plan -out tfplan1'
+					sh 'terraform show -no-color tfplan > tfplan1.txt'
+				}
 			}		
 		}
         stage('Terraform init') {

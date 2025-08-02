@@ -16,8 +16,8 @@ data "aws_subnets" "default_subnet" {
 }
 
 resource "aws_key_pair" "Jenkins-Server-Key" {
-  key_name = "terra_aws_key"
-  public_key = file("terra_aws_key.pub")
+  key_name = "Jenkins-server-key"
+  public_key = file("Jenkins-server-key.pub")
 }
 
 resource "aws_security_group" "Jenkins-CG" {
@@ -81,8 +81,8 @@ resource "aws_vpc_security_group_egress_rule" "Allow_All_Outbound" {
 
 resource "aws_instance" "Jenkins-Server" {
   depends_on = [ aws_security_group.Jenkins-CG ]
-  ami = "ami-021a584b49225376d"
-  instance_type = "t3.medium"
+  ami = var.ami_type
+  instance_type = var.instance_type
   subnet_id = data.aws_subnets.default_subnet.ids[0]
   key_name = aws_key_pair.Jenkins-Server-Key.key_name
   vpc_security_group_ids = [aws_security_group.Jenkins-CG.id]
