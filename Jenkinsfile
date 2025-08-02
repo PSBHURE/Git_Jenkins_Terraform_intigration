@@ -13,11 +13,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/PSBHURE/Git_Jenkins_Terraform_intigration.git'
-            }
-        }
 		stage('Backend Creation') {
 			steps {
 				dir('bootstrap'){
@@ -27,6 +22,11 @@ pipeline {
 				}
 			}		
 		}
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/PSBHURE/Git_Jenkins_Terraform_intigration.git'
+            }
+        }
         stage('Terraform init') {
             steps {
                 sh 'terraform init'
