@@ -82,7 +82,7 @@ resource "aws_vpc_security_group_egress_rule" "Allow_All_Outbound" {
 resource "aws_instance" "Jenkins-Server" {
   depends_on = [ aws_security_group.Jenkins-CG ]
   ami = "ami-021a584b49225376d"
-  instance_type = "t2.micro"
+  instance_type = "t3.medium"
   subnet_id = data.aws_subnets.default_subnet.ids[0]
   key_name = aws_key_pair.Jenkins-Server-Key.key_name
   vpc_security_group_ids = [aws_security_group.Jenkins-CG.id]
